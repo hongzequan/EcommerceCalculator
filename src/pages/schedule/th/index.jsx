@@ -11,51 +11,106 @@ const Schedule = () => {
 
   const columns = [
     {
-      title: 'id',
-      dataIndex: 'id',
-      ellipsis: true,
-      width: 80,
+      title: 'SKU',
+      dataIndex: 'sku',
+      fixed: 'left',
+      key: 'sku',
     },
     {
       title: '名称',
       dataIndex: 'name',
+      key: 'name',
+      width: 200,
+      fixed: 'left',
+    },
+    {
+      title: '出库(RMB)',
+      dataIndex: 'deliveryPrice-RMB',
       width: 200,
     },
     {
-      title: '出库价',
-      dataIndex: 'deliveryPrice',
+      title: '出库（THB）',
+      dataIndex: 'deliveryPrice-THB',
       width: 200,
     },
     {
-      title: 'SKU',
-      dataIndex: 'sku',
+      title: 'TK售价（55%）',
+      dataIndex: 'sellingPrice-55',
       width: 200,
     },
     {
-      title: '描述',
-      dataIndex: 'description',
+      title: '保本CPA（55%）',
+      dataIndex: 'breakEven-CPA-55',
+      width: 200,
     },
     {
-      title: '操作',
-      valueType: 'option',
-      key: 'option',
+      title: '保本Roas（55%）',
+      dataIndex: 'breakEven-Roas-55',
       width: 200,
-      render: (text, record, _, action) => [
-        <a
-          key="editable"
-          onClick={() => {
-            action?.startEditable?.(record.id);
-          }}
-        >
-          编辑
-        </a>,
-        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-          查看
-        </a>,
-      ],
+    },
+    {
+      title: 'TK售价（45%）',
+      dataIndex: 'sellingPrice-45',
+      width: 200,
+    },
+    {
+      title: '保本CPA（45%）',
+      dataIndex: 'breakEven-CPA-45',
+      width: 200,
+    },
+    {
+      title: '保本Roas（45%）',
+      dataIndex: 'breakEven-Roas-45',
+      width: 200,
+    },
+    {
+      title: '预期Roas',
+      dataIndex: 'expect-45',
+      width: 200,
+    },
+    {
+      title: 'TK售价（35%）',
+      dataIndex: 'sellingPrice-35',
+      width: 200,
+    },
+    {
+      title: '保本CPA（35%）',
+      dataIndex: 'breakEven-CPA-35',
+      width: 200,
+    },
+    {
+      title: '保本Roas（35%）',
+      dataIndex: 'breakEven-Roas-35',
+      width: 200,
+    },
+    {
+      title: '预期Roas',
+      dataIndex: 'expect-35',
+      width: 200,
+    },
+    {
+      title: 'TK售价（25%）',
+      dataIndex: 'sellingPrice-25',
+      width: 200,
+    },
+    {
+      title: '保本CPA（25%）',
+      dataIndex: 'breakEven-CPA-25',
+      width: 200,
+    },
+    {
+      title: '保本Roas（25%）',
+      dataIndex: 'breakEven-Roas-25',
+      width: 200,
+    },
+    {
+      title: '预期Roas',
+      dataIndex: 'expect-25',
+      width: 200,
     },
   ];
   const actionRef = useRef();
+  
   return (
     <PageContainer>
       <ProTable
@@ -70,7 +125,7 @@ const Schedule = () => {
           type: 'multiple',
         }}
         columnsState={{
-          persistenceKey: 'pro-table-singe-demos',
+          persistenceKey: 'Schedule.TH',
           persistenceType: 'localStorage',
           onChange(value) {
             console.log('value: ', value);
@@ -79,6 +134,10 @@ const Schedule = () => {
         rowKey="id"
         search={{
           labelWidth: 'auto',
+        }}
+        scroll={{
+          x:'max-content'
+          // x:'scroll'
         }}
         options={{
           setting: {

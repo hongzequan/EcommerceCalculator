@@ -1,114 +1,95 @@
 import { definePageConfig } from 'ice';
-import { PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-import React, { useRef } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import ProTable from '@ant-design/pro-table';
-import { getRepos } from '@/services/product';
+import {
+  ProForm,
+  ProFormMoney,
+  ProFormSwitch,
+  ProFormText,
+} from '@ant-design/pro-components';
+import { message } from 'antd';
+import React, { useRef, useState } from 'react';
 
 //汇率管理
-const ExchangeRate= () => {
-    
-const columns = [
-    {
-      title: 'id',
-      dataIndex: 'id',
-      ellipsis: true,
-      width: 80,
-    },
-    {
-      title: '名称',
-      dataIndex: 'name',
-      width: 200,
-    },
-    {
-        title: '出库价',
-        dataIndex: 'deliveryPrice',
-        width: 200,
-      },
-      {
-        title: 'SKU',
-        dataIndex: 'sku',
-        width: 200,
-      },
-    {
-      title: '描述',
-      dataIndex: 'description',
-    },
-    {
-      title: '操作',
-      valueType: 'option',
-      key: 'option',
-      width: 200,
-      render: (text, record, _, action) => [
-        <a
-          key="editable"
-          onClick={() => {
-            action?.startEditable?.(record.id);
-          }}
-        >
-          编辑
-        </a>,
-        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-          查看
-        </a>,
-      ],
-    },
-  ];
-  const actionRef = useRef();
+const ExchangeRate = () => {
+  const formRef = useRef();
+
+  const [readonly, setReadonly] = useState(false);
   return (
     <PageContainer>
-      <ProTable
-        columns={columns}
-        actionRef={actionRef}
-        cardBordered
-        request={(params = {}, sort, filter) => {
-          console.log(sort, filter);
-          return getRepos(params);
+      <ProFormSwitch
+        checkedChildren="开启"
+        unCheckedChildren="关闭"
+        label="是否只读"
+        fieldProps={{
+          onChange: setReadonly,
         }}
-        editable={{
-          type: 'multiple',
-        }}
-        columnsState={{
-          persistenceKey: 'pro-table-singe-demos',
-          persistenceType: 'localStorage',
-          onChange(value) {
-            console.log('value: ', value);
-          },
-        }}
-        rowKey="id"
-        search={{
-          labelWidth: 'auto',
-        }}
-        options={{
-          setting: {
-            listsHeight: 400,
-          },
-        }}
-        form={{
-          // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
-          syncToUrl: (values, type) => {
-            if (type === 'get') {
-              return {
-                ...values,
-                created_at: [values.startTime, values.endTime],
-              };
-            }
-            return values;
-          },
-        }}
-        pagination={{
-          pageSize: 8,
-        }}
-        dateFormatter="string"
-        toolBarRender={() => [
-          <Button key="button" icon={<PlusOutlined />} type="primary">
-            新建
-          </Button>,
-        ]}
       />
+      <ProForm
+        onFinish={async (values) => {
+          console.log(values, 'values')
+          message.success('提交成功');
+        }}
+        formRef={formRef}
+        params={{ id: '100' }}
+        formKey="exchangeRate-Form"
+        readonly={readonly}
+        request={async () => {
+          console.log('request')
+          return {
+            name: '蚂蚁设计有限公司',
+            useMode: 'chapter',
+          };
+        }}
+        autoFocusFirstInput
+      >
+
+        <ProFormMoney
+          label="1美金等于兑换下面货币"
+          name="USD"
+          initialValue={1}
+          width="lg"
+          readonly
+          locale="en-US"
+        />
+        <ProFormMoney
+          label="人民币"
+          name="RMB"
+          initialValue=''
+          width="lg"
+
+        />
+        <ProFormMoney
+          label="马来西亚林吉特"
+          name="amount-ms-My"
+          locale="ms-MY"
+          initialValue=''
+          width="lg"
+
+        />
+        <ProFormMoney
+          label="泰铢"
+          name="THB"
+          locale="th-TH"
+          initialValue=''
+          width="lg"
+        />
+
+        <ProFormText
+          width="md"
+          name="tk-commission"
+          label="平台抽点"
+          placeholder="请输入平台抽点"
+        />
+         <ProFormText
+          width="md"
+          name="SFP"
+          label="SFP"
+          placeholder="请输入名称SFP"
+        />
+      </ProForm>
     </PageContainer>
   );
+
 };
 
 export default ExchangeRate;
