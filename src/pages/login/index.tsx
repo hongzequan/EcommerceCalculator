@@ -8,6 +8,8 @@ import type { LoginParams, LoginResult } from '@/interfaces/user';
 import { login, fetchUserInfo } from '@/services/user';
 import store from '@/store';
 import logo from '@/assets/logo.png';
+import { setJsonData, checkAllKeysInLocalStorage } from '@/services/initData';
+
 
 const LoginMessage: React.FC<{
   content: string;
@@ -34,6 +36,7 @@ const Login: React.FC = () => {
     userDispatcher.updateCurrentUser(userInfo);
   }
 
+
   async function handleSubmit(values: LoginParams) {
     try {
       const result = await login(values);
@@ -43,6 +46,11 @@ const Login: React.FC = () => {
           admin: result.userType === 'admin',
           user: result.userType === 'user',
         });
+
+        //登录后，写入初始化数据
+        if (!checkAllKeysInLocalStorage('rate', 'product')) {
+          setJsonData()
+        }
         await updateUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
         history?.push(urlParams.get('redirect') || '/');

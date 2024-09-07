@@ -29,9 +29,9 @@ const repos = [
   },
 ];
 
-export async function getRepos(params: Record<string, any>) {
+export function getRepos() {
   // return await request.get('/repos');
-  console.log(params);
+  // console.log(params);
   return {
     data: repos,
     page: 1,

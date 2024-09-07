@@ -5,6 +5,7 @@ import React, { useRef } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { getRepos } from '@/services/product';
+import {calculateTh} from './calculateTh'
 
 // 定价表
 const Schedule = () => {
@@ -46,6 +47,11 @@ const Schedule = () => {
     {
       title: '保本Roas（55%）',
       dataIndex: 'breakEven-Roas-55',
+      width: 200,
+    },
+    {
+      title: '预期Roas',
+      dataIndex: 'expect-55',
       width: 200,
     },
     {
@@ -111,6 +117,7 @@ const Schedule = () => {
   ];
   const actionRef = useRef();
   
+
   return (
     <PageContainer>
       <ProTable
@@ -119,7 +126,13 @@ const Schedule = () => {
         cardBordered
         request={(params = {}, sort, filter) => {
           console.log(sort, filter);
-          return getRepos(params);
+          const sourData=getRepos(params);
+          const dataSource={
+            ...sourData,
+            data:calculateTh(sourData?.data)
+          }
+          console.log(dataSource,'=dataSource')
+          return dataSource
         }}
         editable={{
           type: 'multiple',
@@ -156,9 +169,9 @@ const Schedule = () => {
             return values;
           },
         }}
-        pagination={{
-          pageSize: 8,
-        }}
+        // pagination={{
+        //   pageSize: 8,
+        // }}
         dateFormatter="string"
         toolBarRender={() => [
           <Button key="button" icon={<PlusOutlined />} type="primary">

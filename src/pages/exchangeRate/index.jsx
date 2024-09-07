@@ -4,16 +4,19 @@ import {
   ProForm,
   ProFormMoney,
   ProFormSwitch,
-  ProFormText,
+  ProFormDigit,
 } from '@ant-design/pro-components';
 import { message } from 'antd';
 import React, { useRef, useState } from 'react';
+import { setJsonData, getJsonData } from '@/services/initData';
 
 //汇率管理
 const ExchangeRate = () => {
   const formRef = useRef();
-
+  //页面利用率数据
+  const { rate } =  getJsonData();
   const [readonly, setReadonly] = useState(false);
+  console.log(rate,'rate')
   return (
     <PageContainer>
       <ProFormSwitch
@@ -25,12 +28,13 @@ const ExchangeRate = () => {
         }}
       />
       <ProForm
+        initialValues={rate}
         onFinish={async (values) => {
-          console.log(values, 'values')
+          setJsonData('rate', values)
           message.success('提交成功');
         }}
         formRef={formRef}
-        params={{ id: '100' }}
+        // params={{ id: '100' }}
         formKey="exchangeRate-Form"
         readonly={readonly}
         request={async () => {
@@ -40,51 +44,87 @@ const ExchangeRate = () => {
             useMode: 'chapter',
           };
         }}
+        submitter={{
+          // 配置按钮文本
+          searchConfig: {
+            resetText: '重置',
+            submitText: '保存',
+          }
+        }}
         autoFocusFirstInput
       >
 
         <ProFormMoney
           label="1美金等于兑换下面货币"
           name="USD"
-          initialValue={1}
+          // initialValue={1}
           width="lg"
           readonly
           locale="en-US"
         />
         <ProFormMoney
           label="人民币"
-          name="RMB"
-          initialValue=''
+          name="USDtoRMB"
+          // initialValue={7.08}
           width="lg"
 
         />
         <ProFormMoney
           label="马来西亚林吉特"
-          name="amount-ms-My"
+          name="USDtoMY"
           locale="ms-MY"
-          initialValue=''
+          // initialValue={4.32}
           width="lg"
 
         />
         <ProFormMoney
           label="泰铢"
-          name="THB"
+          name="USDtoTHB"
           locale="th-TH"
-          initialValue=''
+          // initialValue={33.7}
           width="lg"
         />
 
-        <ProFormText
-          width="md"
-          name="tk-commission"
-          label="平台抽点"
+        <ProFormDigit
+          name="tk-commission-TH"
+          label="平台抽点(TH)"
           placeholder="请输入平台抽点"
+          min={0}
+          max={100}
+          width="xs"
+          // initialValue={7.53}
+          addonAfter="%"
         />
-         <ProFormText
-          width="md"
+        <ProFormDigit
+          name="tk-commission-MY"
+          label="平台抽点(MY)"
+          placeholder="请输入平台抽点"
+          min={0}
+          max={100}
+          width="xs"
+          // initialValue={7.53}
+          addonAfter="%"
+        />
+        <ProFormDigit
           name="SFP"
           label="SFP"
           placeholder="请输入名称SFP"
+          min={0}
+          max={100}
+          width="xs"
+          // initialValue={3}
+          addonAfter="%"
+        />
+        <ProFormDigit
+          name="damage"
+          label="货损"
+          placeholder="请输入货损"
+          min={0}
+          max={100}
+          width="xs"
+          // initialValue={10}
+          addonAfter="%"
+
         />
       </ProForm>
     </PageContainer>

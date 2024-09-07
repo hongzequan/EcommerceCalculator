@@ -3,13 +3,22 @@ import { fetchUserInfo } from './services/user';
 import { defineAuthConfig } from '@ice/plugin-auth/types';
 import { defineStoreConfig } from '@ice/plugin-store/types';
 import { defineRequestConfig } from '@ice/plugin-request/types';
+import { setJsonData,checkAllKeysInLocalStorage } from '@/services/initData';
 
 // App config, see https://v3.ice.work/docs/guide/basic/app
 export default defineAppConfig(() => ({}));
+import { setLocalStorage } from '@/tools'
 
 export const authConfig = defineAuthConfig(async (appData) => {
   const { userInfo = {} } = appData;
+  // console.log(userInfo,'===========userInfo')
 
+
+  //测试，需要加判断是否已经存在
+  if(!checkAllKeysInLocalStorage('rate','product')){
+    setJsonData()
+  }
+  
   if (userInfo.error) {
     history?.push(`/login?redirect=${window.location.pathname}`);
   }

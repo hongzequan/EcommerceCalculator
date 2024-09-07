@@ -69,7 +69,7 @@ const columns = [
           type: 'multiple',
         }}
         columnsState={{
-          persistenceKey: 'pro-table-singe-demos',
+          persistenceKey: 'product-Table',
           persistenceType: 'localStorage',
           onChange(value) {
             console.log('value: ', value);
