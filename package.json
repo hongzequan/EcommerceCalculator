@@ -30,6 +30,7 @@
   },
   "scripts": {
     "start": "ice start --speedup",
+    "dev": "ice start --speedup",
     "build": "ice build",
     "eslint": "eslint ./src --cache --ext .js,.jsx,.ts,.tsx",
     "eslint:fix": "npm run eslint -- --fix",

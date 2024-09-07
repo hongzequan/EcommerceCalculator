@@ -67,7 +67,6 @@ const ExchangeRate = () => {
           name="USDtoRMB"
           // initialValue={7.08}
           width="lg"
-
         />
         <ProFormMoney
           label="马来西亚林吉特"

@@ -1,111 +1,107 @@
-import { definePageConfig } from 'ice';
-import { PlusOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-import React, { useRef } from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
-import ProTable from '@ant-design/pro-table';
-import { getRepos } from '@/services/product';
+import { definePageConfig } from "ice";
+import { Form, Card } from "antd";
+import React, { useRef, useState } from "react";
+import { PageContainer } from "@ant-design/pro-layout";
+import ProTable from "@ant-design/pro-table";
+import { ProForm, ProFormMoney } from "@ant-design/pro-components";
+import { calculateTh } from "./calculateTh";
 
 //试算
-const Trial= () => {
-    
-const columns = [
+const Trial = () => {
+  const [form] = Form.useForm();
+
+  const columns = [
     {
-      title: 'id',
-      dataIndex: 'id',
-      ellipsis: true,
-      width: 80,
+      title: "利润率",
+      dataIndex: "rate",
+      search: false,
     },
     {
-      title: '名称',
-      dataIndex: 'name',
-      width: 200,
+      title: "售价(THB)",
+      dataIndex: "sellingPrice",
+      search: false,
     },
     {
-        title: '出库价',
-        dataIndex: 'deliveryPrice',
-        width: 200,
-      },
-      {
-        title: 'SKU',
-        dataIndex: 'sku',
-        width: 200,
-      },
-    {
-      title: '描述',
-      dataIndex: 'description',
+      title: "成本率",
+      dataIndex: "costRate",
+      search: false,
     },
     {
-      title: '操作',
-      valueType: 'option',
-      key: 'option',
-      width: 200,
-      render: (text, record, _, action) => [
-        <a
-          key="editable"
-          onClick={() => {
-            action?.startEditable?.(record.id);
-          }}
-        >
-          编辑
-        </a>,
-        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-          查看
-        </a>,
-      ],
+      title: "最大CPA",
+      dataIndex: "maxCpa",
+      search: false,
+    },
+    {
+      title: "保本Roas",
+      dataIndex: "breakEven-Roas",
+      search: false,
+    },
+    {
+      title: "预期Roas-20%",
+      dataIndex: "breakEven-Roas-20",
+      search: false,
+    },
+    {
+      title: "预期Roas-28%",
+      dataIndex: "breakEven-Roas-28",
+      search: false,
     },
   ];
   const actionRef = useRef();
+
+  //查询
+  const onFinish = (values) => {
+    const array = calculateTh(values?.deliveryPrice);
+    setDataSource(array);
+  };
+
+  //数据源
+  const [dataSource, setDataSource] = useState([]);
+
+  const customSearch = () => {
+    return (
+      <Card style={{ marginBottom: 16 }}>
+        <ProForm
+          submitter={{
+            searchConfig: {
+              resetText: "重置",
+              submitText: "查询",
+            },
+          }}
+          form={form}
+          onFinish={onFinish}
+          layout="inline"
+        >
+          <ProFormMoney label="出库价" name="deliveryPrice"  />
+        </ProForm>
+      </Card>
+    );
+  };
+
   return (
-    <PageContainer>
+    <PageContainer
+      header={{
+        breadcrumb: {},
+      }}
+    >
       <ProTable
+        searchFormRender={customSearch}
         columns={columns}
         actionRef={actionRef}
         cardBordered
-        request={(params = {}, sort, filter) => {
-          console.log(sort, filter);
-          return getRepos(params);
-        }}
-        editable={{
-          type: 'multiple',
-        }}
+        dataSource={dataSource}
         columnsState={{
-          persistenceKey: 'pro-table-singe-demos',
-          persistenceType: 'localStorage',
-          onChange(value) {
-            console.log('value: ', value);
-          },
+          persistenceKey: "trial-table",
+          persistenceType: "localStorage",
+          // onChange(value) {
+          //   console.log("value: ", value);
+          // },
         }}
-        rowKey="id"
-        search={{
-          labelWidth: 'auto',
+        scroll={{
+          y: window.innerHeight - 520,
         }}
-        options={{
-          setting: {
-            listsHeight: 400,
-          },
-        }}
-        form={{
-          // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
-          syncToUrl: (values, type) => {
-            if (type === 'get') {
-              return {
-                ...values,
-                created_at: [values.startTime, values.endTime],
-              };
-            }
-            return values;
-          },
-        }}
-        pagination={{
-          pageSize: 8,
-        }}
-        dateFormatter="string"
-        toolBarRender={() => [
-          <Button key="button" icon={<PlusOutlined />} type="primary">
-            新建
-          </Button>,
-        ]}
+        rowKey="rate"
+        pagination={false}
       />
     </PageContainer>
   );
@@ -115,6 +111,6 @@ export default Trial;
 
 export const pageConfig = definePageConfig(() => {
   return {
-    auth: ['admin'],
+    auth: ["admin"],
   };
 });
