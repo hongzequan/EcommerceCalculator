@@ -12,19 +12,19 @@ function getSellingPrice(price, s_rate) {
 
 //计算CPA
 function getBreakEvenCPA(sellingPrice, s_rate) {
-  const maxCpa = (sellingPrice * s_rate) / rate.USDtoTHB;
+  const maxCpa = (sellingPrice * s_rate) / rate?.USDtoTHB;
   return maxCpa.toFixed(2);
 }
 
 //计算Roas
 function getBreakEvenRoas(s_rate) {
-  const roas = (1 / s_rate) * (1 + rate.damage / 100);
+  const roas = (1 / s_rate) * (1 + rate?.damage / 100);
   return roas.toFixed(2);
 }
 
 //预期Roas 20%
 function getExpect(s_rate) {
-  const roas = (1 / (s_rate - 0.2))* (1 + rate.damage / 100);
+  const roas = (1 / (s_rate - 0.2))* (1 + rate?.damage / 100);
   return roas.toFixed(2);
 }
 

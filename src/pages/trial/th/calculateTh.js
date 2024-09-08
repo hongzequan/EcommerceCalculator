@@ -12,7 +12,7 @@ function getSellingPrice(price, s_rate) {
 
 //计算CPA
 function getBreakEvenCPA(sellingPrice, s_rate) {
-  const maxCpa = (sellingPrice * s_rate) / rate.USDtoTHB;
+  const maxCpa = (sellingPrice * s_rate) / rate?.USDtoTHB;
   return maxCpa.toFixed(2);
 }
 
@@ -22,7 +22,7 @@ function getBreakEvenRoas(s_rate) {
     // 检查 s_rate 是否等于 1 或 0
     return "--"; // 返回一个特定值，用于 s_rate = 1 或 0
   } else {
-    const roas = (1 / s_rate) * (1 + rate.damage / 100);
+    const roas = (1 / s_rate) * (1 + rate?.damage / 100);
     return roas.toFixed(2);
   }
 }
@@ -33,7 +33,7 @@ function getExpect(s_rate) {
     // 检查 s_rate 是否等于 1 或 0
     return "--"; // 返回一个特定值，用于 s_rate = 1 或 0
   } else {
-    const roas = ((1 / s_rate) * (1 + rate.damage / 100)).toFixed(2);
+    const roas = ((1 / s_rate) * (1 + rate?.damage / 100)).toFixed(2);
     return roas > 0 ? roas : "--";
   }
 }
@@ -51,7 +51,7 @@ export function calculateTh(price) {
   }
 
   let arr = [];
-  const priceTHB = (price / rate.USDtoRMB) * rate.USDtoTHB; //出库价
+  const priceTHB = (price / rate?.USDtoRMB) * rate?.USDtoTHB; //出库价
 
   for (let i = 100; i >= 0; i--) {
     const sellingPrice = getSellingPrice(priceTHB, i / 100); //售价
