@@ -17,7 +17,7 @@ const Trial = () => {
       search: false,
     },
     {
-      title: "售价(THB)",
+      title: "售价(THB)฿",
       dataIndex: "sellingPrice",
       search: false,
     },
@@ -27,7 +27,7 @@ const Trial = () => {
       search: false,
     },
     {
-      title: "最大CPA",
+      title: "最大CPA$",
       dataIndex: "maxCpa",
       search: false,
     },
@@ -111,6 +111,6 @@ export default Trial;
 
 export const pageConfig = definePageConfig(() => {
   return {
-    auth: ["admin"],
+    auth: ["admin",'user'],
   };
 });

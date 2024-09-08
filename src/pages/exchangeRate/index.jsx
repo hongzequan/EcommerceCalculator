@@ -135,6 +135,6 @@ export default ExchangeRate;
 
 export const pageConfig = definePageConfig(() => {
   return {
-    auth: ['admin'],
+    auth: ['admin','user'],
   };
 });

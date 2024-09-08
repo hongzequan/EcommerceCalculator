@@ -1,32 +1,33 @@
-import { defineAppConfig, history, defineDataLoader } from 'ice';
-import { fetchUserInfo } from './services/user';
-import { defineAuthConfig } from '@ice/plugin-auth/types';
-import { defineStoreConfig } from '@ice/plugin-store/types';
-import { defineRequestConfig } from '@ice/plugin-request/types';
-import { setJsonData,checkAllKeysInLocalStorage } from '@/services/initData';
+import { defineAppConfig, history, defineDataLoader } from "ice";
+import { fetchUserInfo } from "./services/user";
+import { defineAuthConfig } from "@ice/plugin-auth/types";
+import { defineStoreConfig } from "@ice/plugin-store/types";
+import { defineRequestConfig } from "@ice/plugin-request/types";
+import { setJsonData, checkAllKeysInLocalStorage } from "@/services/initData";
 
 // App config, see https://v3.ice.work/docs/guide/basic/app
 export default defineAppConfig(() => ({}));
-import { setLocalStorage } from '@/tools'
+import { setLocalStorage } from "@/tools";
+
 
 export const authConfig = defineAuthConfig(async (appData) => {
   const { userInfo = {} } = appData;
   // console.log(userInfo,'===========userInfo')
 
+  // //测试，需要加判断是否已经存在
+  // if(!checkAllKeysInLocalStorage('rate','product')){
+  //   setJsonData()
+  // }
 
-  //测试，需要加判断是否已经存在
-  if(!checkAllKeysInLocalStorage('rate','product')){
-    setJsonData()
-  }
-  
   if (userInfo.error) {
     history?.push(`/login?redirect=${window.location.pathname}`);
   }
 
+
   return {
     initialAuth: {
-      admin: userInfo.userType === 'admin',
-      user: userInfo.userType === 'user',
+      admin: userInfo.userType === "admin",
+      user: userInfo.userType === "user",
     },
   };
 });
@@ -43,7 +44,7 @@ export const storeConfig = defineStoreConfig(async (appData) => {
 });
 
 export const request = defineRequestConfig(() => ({
-  baseURL: '/api',
+  baseURL: "/api",
 }));
 
 export const dataLoader = defineDataLoader(async () => {

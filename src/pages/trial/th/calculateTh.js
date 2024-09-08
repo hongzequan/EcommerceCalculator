@@ -18,22 +18,27 @@ function getBreakEvenCPA(sellingPrice, s_rate) {
 
 //计算Roas
 function getBreakEvenRoas(s_rate) {
-  const roas = 1 / s_rate;
-  return roas.toFixed(2);
+  if (s_rate === 1 || s_rate === 0) {
+    // 检查 s_rate 是否等于 1 或 0
+    return "--"; // 返回一个特定值，用于 s_rate = 1 或 0
+  } else {
+    const roas = (1 / s_rate) * (1 + rate.damage / 100);
+    return roas.toFixed(2);
+  }
 }
 
 //预期Roas s_rate 利润率
 function getExpect(s_rate) {
-    if (s_rate === 1) { // Check for s_rate being 1
-      return "--"; // Return a specific value for s_rate = 1
-    } else {
-      const roas = (1 / (1 - s_rate)).toFixed(2);
-      return roas > 0 ? roas : "--";
-    }
+  if (s_rate === 1 || s_rate === 0) {
+    // 检查 s_rate 是否等于 1 或 0
+    return "--"; // 返回一个特定值，用于 s_rate = 1 或 0
+  } else {
+    const roas = ((1 / s_rate) * (1 + rate.damage / 100)).toFixed(2);
+    return roas > 0 ? roas : "--";
   }
+}
 
 //计算成本率 成本价/售价
-
 function getCostRate(price, priceTHB) {
   const cr = ((priceTHB / price) * 100).toFixed(2);
   return cr > 0 ? cr + "%" : "--";
@@ -60,8 +65,8 @@ export function calculateTh(price) {
           ? getBreakEvenCPA(sellingPrice, i / 100)
           : "--", //cpa
       "breakEven-Roas": getBreakEvenRoas(i / 100),
-      "breakEven-Roas-20": getExpect(i / 100 + 0.2),
-      "breakEven-Roas-28": getExpect(i / 100 + 0.28),
+      "breakEven-Roas-20": getExpect(i / 100 - 0.2),
+      "breakEven-Roas-28": getExpect(i / 100 - 0.28),
     });
   }
 

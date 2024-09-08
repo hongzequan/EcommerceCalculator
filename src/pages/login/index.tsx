@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { definePageConfig, history, useAuth } from 'ice';
-import { message, Alert } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { ProFormCheckbox, ProFormText, LoginForm } from '@ant-design/pro-form';
-import styles from './index.module.css';
-import type { LoginParams, LoginResult } from '@/interfaces/user';
-import { login, fetchUserInfo } from '@/services/user';
-import store from '@/store';
-import logo from '@/assets/logo.png';
-import { setJsonData, checkAllKeysInLocalStorage } from '@/services/initData';
-
+import React, { useState } from "react";
+import { definePageConfig, history, useAuth } from "ice";
+import { message, Alert } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { ProFormCheckbox, ProFormText, LoginForm } from "@ant-design/pro-form";
+import styles from "./index.module.css";
+import type { LoginParams, LoginResult } from "@/interfaces/user";
+import { login, fetchUserInfo } from "@/services/user";
+import store from "@/store";
+import logo from "@/assets/logo.png";
+import { setJsonData, checkAllKeysInLocalStorage } from "@/services/initData";
+import { setLocalStorage } from "@/tools";
 
 const LoginMessage: React.FC<{
   content: string;
@@ -28,39 +28,41 @@ const LoginMessage: React.FC<{
 
 const Login: React.FC = () => {
   const [loginResult, setLoginResult] = useState<LoginResult>({});
-  const [, userDispatcher] = store.useModel('user');
+  const [, userDispatcher] = store.useModel("user");
   const [, setAuth] = useAuth();
 
+  //获取用户信息
   async function updateUserInfo() {
     const userInfo = await fetchUserInfo();
     userDispatcher.updateCurrentUser(userInfo);
-  }
+    setLocalStorage('user',userInfo)
 
+  }
 
   async function handleSubmit(values: LoginParams) {
     try {
       const result = await login(values);
       if (result.success) {
-        message.success('登录成功！');
+        message.success("登录成功！");
         setAuth({
-          admin: result.userType === 'admin',
-          user: result.userType === 'user',
+          admin: result.userType === "admin",
+          user: result.userType === "user",
         });
 
         //登录后，写入初始化数据
-        if (!checkAllKeysInLocalStorage('rate', 'product')) {
-          setJsonData()
+        if (!checkAllKeysInLocalStorage("rate", "product")) {
+          setJsonData();
         }
         await updateUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
-        history?.push(urlParams.get('redirect') || '/');
+        history?.push(urlParams.get("redirect") || "/");
         return;
       }
       console.log(result);
       // 如果失败去设置用户错误信息，显示提示信息
       setLoginResult(result);
     } catch (error) {
-      message.error('登录失败，请重试！');
+      message.error("登录失败，请重试！");
       console.log(error);
     }
   }
@@ -75,35 +77,33 @@ const Login: React.FC = () => {
         }}
       >
         {loginResult.success === false && (
-          <LoginMessage
-            content="账户或密码错误(admin/ice)"
-          />
+          <LoginMessage content="账户或密码错误(admin/ice)" />
         )}
         <ProFormText
           name="username"
           fieldProps={{
-            size: 'large',
-            prefix: <UserOutlined className={'prefixIcon'} />,
+            size: "large",
+            prefix: <UserOutlined className={"prefixIcon"} />,
           }}
-          placeholder={'用户名: admin or user'}
+          placeholder={"用户名: user"}
           rules={[
             {
               required: true,
-              message: '请输入用户名!',
+              message: "请输入用户名!",
             },
           ]}
         />
         <ProFormText.Password
           name="password"
           fieldProps={{
-            size: 'large',
-            prefix: <LockOutlined className={'prefixIcon'} />,
+            size: "large",
+            prefix: <LockOutlined className={"prefixIcon"} />,
           }}
-          placeholder={'密码: ice'}
+          placeholder={"密码: 123456"}
           rules={[
             {
               required: true,
-              message: '请输入密码！',
+              message: "请输入密码！",
             },
           ]}
         />
@@ -117,7 +117,7 @@ const Login: React.FC = () => {
           </ProFormCheckbox>
           <a
             style={{
-              float: 'right',
+              float: "right",
             }}
           >
             忘记密码
@@ -130,7 +130,7 @@ const Login: React.FC = () => {
 
 export const pageConfig = definePageConfig(() => {
   return {
-    title: '登录',
+    title: "登录",
   };
 });
 

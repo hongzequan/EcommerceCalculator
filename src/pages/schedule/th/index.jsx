@@ -165,12 +165,14 @@ const Schedule = () => {
           //   console.log('value: ', value);
           // },
         }}
+
         rowKey="id"
         // search={{
         //   labelWidth: "auto",
         // }}
         scroll={{
           x: "max-content",
+          y: window.innerHeight - 520,
         }}
         pagination={false}
       />
