@@ -49,8 +49,9 @@ export async function login(data: LoginParams): Promise<LoginResult> {
 
 export async function fetchUserInfo() {
   // return await request.get('/user');
-  const user = getLocalStorage("user");
-  return user ? user : currentUserInfo;
+  // const user = getLocalStorage("user");
+  // return user ? user : currentUserInfo;
+  return currentUserInfo
 }
 
 export async function logout() {
