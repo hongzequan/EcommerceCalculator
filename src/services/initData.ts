@@ -34,7 +34,7 @@ export function getJsonData() {
 }
 
 //存数据
-export function setJsonData(key?: any, value?: any) {
+export async function  setJsonData(key?: any, value?: any) {
   console.log(key, "key", value);
   if (key) {
     key === "rate" && setLocalStorage("rate", value);

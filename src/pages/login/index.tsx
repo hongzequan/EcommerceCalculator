@@ -51,7 +51,7 @@ const Login: React.FC = () => {
 
         //登录后，写入初始化数据
         if (!checkAllKeysInLocalStorage("rate", "product")) {
-          setJsonData();
+          await setJsonData();
         }
         await updateUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
