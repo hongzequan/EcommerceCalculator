@@ -85,6 +85,30 @@ const Schedule = () => {
       search: false,
     },
     {
+      title: "TK售价（40%）฿",
+      dataIndex: "sellingPrice-40",
+      width: 200,
+      search: false,
+    },
+    {
+      title: "最大CPA（40%）$",
+      dataIndex: "breakEven-CPA-40",
+      width: 200,
+      search: false,
+    },
+    {
+      title: "保本Roas（40%）",
+      dataIndex: "breakEven-Roas-40",
+      width: 200,
+      search: false,
+    },
+    {
+      title: "预期Roas-20%",
+      dataIndex: "expect-40",
+      width: 200,
+      search: false,
+    },
+    {
       title: "TK售价（35%）฿",
       dataIndex: "sellingPrice-35",
       width: 200,

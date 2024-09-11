@@ -54,15 +54,23 @@ export function calculateTh(array) {
 
         "sellingPrice-45": getSellingPrice(deliveryPriceTHB, 0.45),
         "breakEven-CPA-45": getBreakEvenCPA(
-          getSellingPrice(deliveryPriceTHB, 0.55),
+          getSellingPrice(deliveryPriceTHB, 0.45),
           0.45
         ),
         "breakEven-Roas-45": getBreakEvenRoas(0.45),
         "expect-45": getExpect(0.45),
 
+        "sellingPrice-40": getSellingPrice(deliveryPriceTHB, 0.40),
+        "breakEven-CPA-40": getBreakEvenCPA(
+          getSellingPrice(deliveryPriceTHB, 0.40),
+          0.40
+        ),
+        "breakEven-Roas-40": getBreakEvenRoas(0.40),
+        "expect-40": getExpect(0.40),
+        
         "sellingPrice-35": getSellingPrice(deliveryPriceTHB, 0.35),
         "breakEven-CPA-35": getBreakEvenCPA(
-          getSellingPrice(deliveryPriceTHB, 0.55),
+          getSellingPrice(deliveryPriceTHB, 0.35),
           0.35
         ),
         "breakEven-Roas-35": getBreakEvenRoas(0.35),
@@ -70,7 +78,7 @@ export function calculateTh(array) {
 
         "sellingPrice-25": getSellingPrice(deliveryPriceTHB, 0.25),
         "breakEven-CPA-25": getBreakEvenCPA(
-          getSellingPrice(deliveryPriceTHB, 0.55),
+          getSellingPrice(deliveryPriceTHB, 0.25),
           0.25
         ),
         "breakEven-Roas-25": getBreakEvenRoas(0.25),
