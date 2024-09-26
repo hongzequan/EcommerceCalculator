@@ -172,7 +172,7 @@ const Schedule = () => {
         cardBordered
         request={(params, sort, filter) => {
           // console.log(params, sort, filter,'定价表搜索条件');
-          const sourData = getRepos('th',params, sort, filter);
+          const sourData = getRepos('my',params, sort, filter);
           const dataSource = {
             ...sourData,
             data: calculateTh(sourData?.data),

@@ -1,4 +1,5 @@
-const repos = [
+//泰国产品
+const reposTH = [
   {
     id: 1,
     name: "聚宝盆100W",
@@ -448,17 +449,31 @@ const repos = [
     description: "宠物蒸汽毛刷",
   },
 ];
-export function getRepos(params?: any) {
+//马来产品
+const reposMY = [];
+//map映射
+const countryMap = {
+  th: reposTH,
+  my: reposMY,
+};
+
+//获取数据
+export function getRepos(country?: any, params?: any) {
   // If no params are provided, return all repos
+  //如果国家为空，则默认获取所有数据
+  if (country === undefined) {
+    return countryMap;
+  }
+
   if (params === undefined) {
     return {
-      data: repos,
+      data: countryMap[country],
       success: true,
     };
   }
 
   // Create a copy of the repos array for filtering
-  let filteredRepos = [...repos];
+  let filteredRepos = [...countryMap[country]];
 
   // Filter by SKU if provided
   if (params.sku) {

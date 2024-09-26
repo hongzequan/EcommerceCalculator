@@ -12,13 +12,11 @@ export default defineAppConfig(() => ({}));
 
 export const authConfig = defineAuthConfig(async (appData) => {
   const { userInfo } = appData;
-  // console.log(userInfo,'===========userInfo')
 
   // //测试，需要加判断是否已经存在
   // if(!checkAllKeysInLocalStorage('rate','product')){
   //   setJsonData()
   // }
-  console.log(userInfo,'userInfo')
   if (!userInfo) {
     if(window.location.pathname!=='/login'){
     history?.push(`/login?redirect=${window.location.pathname}`);

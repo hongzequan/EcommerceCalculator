@@ -53,12 +53,8 @@ export async function login(data: LoginParams): Promise<LoginResult> {
 }
 
 export async function fetchUserInfo(userType) {
-  const user = getLocalStorage("user");
-  // console.log(userType,userMap,user != null ? user : userMap[userType], '===')
-  // console.log(userMap[userType],'userMap[userType]')
-  // console.log(userMap[userType],'==')
-  console.log(user,'fetchUserInfo:user')
-  console.log('fetchUserInfo的返回值:',user != null ? user : userMap[userType])
+  const user = getLocalStorage("user"); //获取缓存的用户信息
+  //如果缓存里没有，就从登录的类型里取一个出来
   return user != null ? user : userMap[userType]
 }
 
