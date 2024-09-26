@@ -18,9 +18,10 @@ export const authConfig = defineAuthConfig(async (appData) => {
   // if(!checkAllKeysInLocalStorage('rate','product')){
   //   setJsonData()
   // }
-
-  if (userInfo.error) {
-    history?.push(`/login?redirect=${window.location.pathname}`);
+  console.log(userInfo,'userInfo')
+  if (!userInfo) {
+    history?.push(`/login`);
+    // history?.push(`/login?redirect=${window.location.pathname}`);
   }
 
 

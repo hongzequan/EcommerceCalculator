@@ -32,8 +32,8 @@ const Login: React.FC = () => {
   const [, setAuth] = useAuth();
 
   //获取用户信息
-  async function updateUserInfo() {
-    const userInfo = await fetchUserInfo();
+  async function updateUserInfo(userType) {
+    const userInfo = await fetchUserInfo(userType);
     userDispatcher.updateCurrentUser(userInfo);
     setLocalStorage('user',userInfo)
 
@@ -53,7 +53,7 @@ const Login: React.FC = () => {
         if (!checkAllKeysInLocalStorage("rate", "product")) {
           await setJsonData();
         }
-        await updateUserInfo();
+        await updateUserInfo(result.userType);
         const urlParams = new URL(window.location.href).searchParams;
         history?.push(urlParams.get("redirect") || "/");
         return;
