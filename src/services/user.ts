@@ -54,8 +54,11 @@ export async function login(data: LoginParams): Promise<LoginResult> {
 
 export async function fetchUserInfo(userType) {
   const user = getLocalStorage("user");
-  console.log(userType,userMap,user != null ? user : userMap[userType], '===')
-  console.log(userMap[userType],'==')
+  // console.log(userType,userMap,user != null ? user : userMap[userType], '===')
+  // console.log(userMap[userType],'userMap[userType]')
+  // console.log(userMap[userType],'==')
+  console.log(user,'fetchUserInfo:user')
+  console.log('fetchUserInfo的返回值:',user != null ? user : userMap[userType])
   return user != null ? user : userMap[userType]
 }
 

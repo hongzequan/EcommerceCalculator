@@ -7,11 +7,11 @@ import { setJsonData, checkAllKeysInLocalStorage } from "@/services/initData";
 
 // App config, see https://v3.ice.work/docs/guide/basic/app
 export default defineAppConfig(() => ({}));
-import { setLocalStorage } from "@/tools";
+// import { setLocalStorage } from "@/tools";
 
 
 export const authConfig = defineAuthConfig(async (appData) => {
-  const { userInfo = {} } = appData;
+  const { userInfo } = appData;
   // console.log(userInfo,'===========userInfo')
 
   // //测试，需要加判断是否已经存在
@@ -20,15 +20,17 @@ export const authConfig = defineAuthConfig(async (appData) => {
   // }
   console.log(userInfo,'userInfo')
   if (!userInfo) {
-    history?.push(`/login`);
-    // history?.push(`/login?redirect=${window.location.pathname}`);
+    if(window.location.pathname!=='/login'){
+    history?.push(`/login?redirect=${window.location.pathname}`);
+      
+    }
   }
 
 
   return {
     initialAuth: {
-      admin: userInfo.userType === "admin",
-      user: userInfo.userType === "user",
+      admin: userInfo?.userType === "admin",
+      user: userInfo?.userType === "user",
     },
   };
 });
