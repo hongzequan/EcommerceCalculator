@@ -2,13 +2,13 @@ import type { LoginParams, LoginResult, UserInfo } from "@/interfaces/user";
 import { clearLocalStorage, getLocalStorage } from "@/tools";
 import { error } from "console";
 const adminInfo: UserInfo = {
-  name: "Admin",
+  name: "方舟",
   avatar: "https://img.alicdn.com/tfs/TB1.ZBecq67gK0jSZFHXXa9jVXa-904-826.png",
   userid: "00000001",
   userType: "admin",
 };
 const userInfo: UserInfo = {
-  name: "User",
+  name: "普通用户",
   avatar: "https://img.alicdn.com/tfs/TB1.ZBecq67gK0jSZFHXXa9jVXa-904-826.png",
   userid: "00000002",
   userType: "user",

@@ -77,7 +77,7 @@ const Login: React.FC = () => {
         }}
       >
         {loginResult.success === false && (
-          <LoginMessage content="账户或密码错误(admin/ice)" />
+          <LoginMessage content="账户或密码错误" />
         )}
         <ProFormText
           name="username"
