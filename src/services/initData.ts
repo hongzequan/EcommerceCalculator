@@ -17,9 +17,9 @@ import { setLocalStorage, getLocalStorage } from "@/tools";
 const productList = getRepos();
 const rate = {
   USD: 1,
-  USDtoRMB: 7.01,
+  USDtoRMB: 7.07,
   USDtoMY: 4.14,
-  USDtoTHB: 32.55,
+  USDtoTHB: 33.51,
   "tk-commission-TH": 7.53,
   "tk-commission-MY": 7.53,
   SFP: 3,
