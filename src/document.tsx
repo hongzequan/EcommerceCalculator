@@ -5,9 +5,9 @@ export default function Document() {
     <html>
       <head>
         <meta charSet="utf-8" />
-        <meta name="description" content="ice.js 3 antd pro scaffold" />
+        <meta name="description" content="洪泽权自建运营系统" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" /> */}
         <Meta />
         <Title />
         <Links />

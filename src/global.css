@@ -16,3 +16,7 @@
 .ant-pro-page-container-children-content {
   padding-block: 24px;
 }
+
+.ant-pro-form >div:not(.ant-pro-form-light-filter) .pro-field{
+  max-width: inherit;
+}

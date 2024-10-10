@@ -10,12 +10,12 @@ const asideMenuConfig: MenuDataItem[] = [
   {
     name: '产品',
     path: '/product',
-    icon: <FormOutlined />,
+    icon: <i className='iconfont icon-chanpin'></i>,
   },
   {
     name: '定价表',
     path: '/schedule',
-    icon: <FormOutlined />,
+    icon: <i className='iconfont icon-zhanghumingxi'></i>,
     children: [
       {
         name: '泰国TH',
@@ -30,7 +30,7 @@ const asideMenuConfig: MenuDataItem[] = [
   {
     name: '试算',
     path: '/trial ',
-    icon: <FormOutlined />,
+    icon: <i className='iconfont icon-shisuan'></i>,
     children: [
       {
         name: '泰国TH',
@@ -45,7 +45,7 @@ const asideMenuConfig: MenuDataItem[] = [
   {
     name: '利润计算',
     path: '/profit ',
-    icon: <FormOutlined />,
+    icon: <i className='iconfont icon-lirunfenxi'></i>,
     children: [
       {
         name: '泰国TH',
@@ -60,7 +60,7 @@ const asideMenuConfig: MenuDataItem[] = [
   {
     name: '汇率管理',
     path: '/exchangeRate ',
-    icon: <FormOutlined />,
+    icon: <i className='iconfont icon-huishuaiguanli'></i>,
   },
 
   // {

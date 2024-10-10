@@ -3,7 +3,7 @@ import { fetchUserInfo } from "./services/user";
 import { defineAuthConfig } from "@ice/plugin-auth/types";
 import { defineStoreConfig } from "@ice/plugin-store/types";
 import { defineRequestConfig } from "@ice/plugin-request/types";
-import { setJsonData, checkAllKeysInLocalStorage } from "@/services/initData";
+import './assets/iconfont/iconfont.css'
 
 // App config, see https://v3.ice.work/docs/guide/basic/app
 export default defineAppConfig(() => ({}));
@@ -57,7 +57,7 @@ export const dataLoader = defineDataLoader(async () => {
 
 async function getUserInfo() {
   try {
-    const userInfo = await fetchUserInfo();
+    const userInfo = await fetchUserInfo('');
     return userInfo;
   } catch (error) {
     return {

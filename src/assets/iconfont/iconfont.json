@@ -1,0 +1,44 @@
+{
+  "id": "4706678",
+  "name": "方舟运营系统",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "839492",
+      "name": "产品",
+      "font_class": "chanpin",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "10754168",
+      "name": "试算",
+      "font_class": "shisuan",
+      "unicode": "e6b7",
+      "unicode_decimal": 59063
+    },
+    {
+      "icon_id": "14653513",
+      "name": "利润分析",
+      "font_class": "lirunfenxi",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "16402904",
+      "name": "账户明细",
+      "font_class": "zhanghumingxi",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "26150104",
+      "name": "汇率管理",
+      "font_class": "huishuaiguanli",
+      "unicode": "e6aa",
+      "unicode_decimal": 59050
+    }
+  ]
+}
