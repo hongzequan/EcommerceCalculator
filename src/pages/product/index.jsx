@@ -60,9 +60,8 @@ const Product = () => {
         columns={columns}
         actionRef={actionRef}
         cardBordered
-        request={(params = {}, sort, filter) => {
-          // console.log(sort, filter);
-          return getRepos(params, sort, filter);
+        request={(params, sort, filter) => {
+          return getRepos(undefined,params, sort, filter);
         }}
         editable={{
           type: "multiple",

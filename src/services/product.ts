@@ -457,24 +457,29 @@ const countryMap = {
   my: reposMY,
 };
 
+
 //获取数据
 export function getRepos(country?: any, params?: any) {
   // If no params are provided, return all repos
-  //如果国家为空，则默认获取所有数据
+  //如果国家为空，则默认获取所有数据---产品页面
   if (country === undefined) {
-    return countryMap;
+    return {
+      data: [...countryMap.th, ...countryMap.my],
+      success: true,
+    };
   }
 
   if (params === undefined) {
     return {
-      data: countryMap[country],
+      data: country&&countryMap[country],
       success: true,
     };
   }
 
   // Create a copy of the repos array for filtering
-  let filteredRepos = [...countryMap[country]];
 
+  let repos = country&&countryMap[country] || []; // 使用空数组作为默认值
+  let filteredRepos = [...repos];
   // Filter by SKU if provided
   if (params.sku) {
     const skuRegex = new RegExp(params.sku, "i");

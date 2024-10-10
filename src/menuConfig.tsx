@@ -43,6 +43,21 @@ const asideMenuConfig: MenuDataItem[] = [
     ],
   },
   {
+    name: '利润计算',
+    path: '/profit ',
+    icon: <FormOutlined />,
+    children: [
+      {
+        name: '泰国TH',
+        path: '/profit/th',
+      },
+      {
+        name: '马来MY',
+        path: '/profit/my',
+      },
+    ],
+  },
+  {
     name: '汇率管理',
     path: '/exchangeRate ',
     icon: <FormOutlined />,
