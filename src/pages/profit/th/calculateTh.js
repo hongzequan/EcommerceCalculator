@@ -1,74 +1,36 @@
 import { getJsonData } from "@/services/initData";
 
-//利润率相关单位数据
 const { rate } = getJsonData("rate");
 
-//计算售价
-function getSellingPrice(price, s_rate) {
-  const sellingPrice =
-    price / (1 - s_rate - rate?.["tk-commission-TH"] / 100 - rate?.SFP / 100);
-  return sellingPrice.toFixed(2);
-}
+export function calculateTh(data) {
 
-//计算CPA
-function getBreakEvenCPA(sellingPrice, s_rate) {
-  const maxCpa = (sellingPrice * s_rate) / rate?.USDtoTHB;
-  return maxCpa.toFixed(2);
-}
+    const { dataSource, allGMV, returns, serviceFee } = data;
 
-//计算Roas
-function getBreakEvenRoas(s_rate) {
-  if (s_rate === 1 || s_rate === 0) {
-    // 检查 s_rate 是否等于 1 或 0
-    return "--"; // 返回一个特定值，用于 s_rate = 1 或 0
-  } else {
-    const roas = (1 / s_rate) * (1 + rate?.damage / 100);
-    return roas.toFixed(2);
-  }
-}
+    const arrGMV = dataSource.reduce((sum, item) => sum + parseInt(item.gmv), 0); //广告总GMV
+    const arrNum = dataSource.reduce((sum, item) => sum + parseInt(item.num), 0); //广告总单量
 
-//预期Roas s_rate 利润率
-function getExpect(s_rate) {
-  if (s_rate === 1 || s_rate === 0) {
-    // 检查 s_rate 是否等于 1 或 0
-    return "--"; // 返回一个特定值，用于 s_rate = 1 或 0
-  } else {
-    const roas = ((1 / s_rate) * (1 + rate?.damage / 100)).toFixed(2);
-    return roas > 0 ? roas : "--";
-  }
-}
 
-//计算成本率 成本价/售价
-function getCostRate(price, priceTHB) {
-  const cr = ((priceTHB / price) * 100).toFixed(2);
-  return cr > 0 ? cr + "%" : "--";
-}
+    const newDataSource = dataSource.map(item => {
+        const numRate = ((item.num / arrNum) * 100).toFixed(2) + '%';
+        const gmvRate = ((item.gmv / arrGMV) * 100).toFixed(2) + '%';
+        const cost = item.cost * rate?.USDtoTHB;
+        const revenue = allGMV * parseFloat(gmvRate) / 100;
+        const returnPrice = returns * parseFloat(numRate) / 100;
+        const serviceFeePrice = parseInt(serviceFee) * parseFloat(gmvRate) / 100;
+        const profit = revenue - returnPrice - serviceFee
 
-// 计算值
-export function calculateTh(price) {
-  if (price === undefined || price === null) {
-    return []; // 如果 price 为空，返回空数组
-  }
+        return {
+            ...item,
+            numRate: numRate,//单量占比
+            gmvRate: gmvRate,//GMV占比
+            cost: cost.toFixed(2),//户消耗
+            revenue: revenue.toFixed(2),//营收
+            returnPrice: returnPrice.toFixed(2),//退损
+            serviceFee: serviceFeePrice.toFixed(2),//佣金
+            profit: profit.toFixed(2)//利润
 
-  let arr = [];
-  const priceTHB = (price / rate?.USDtoRMB) * rate?.USDtoTHB; //出库价
+        }
+    })
 
-  for (let i = 100; i >= 0; i--) {
-    const sellingPrice = getSellingPrice(priceTHB, i / 100); //售价
-    // 在循环中执行您的操作
-    arr.push({
-      rate: i + `%`,
-      sellingPrice: sellingPrice > 0 ? sellingPrice : "--", //售价
-      costRate: getCostRate(sellingPrice, priceTHB),
-      maxCpa:
-        getBreakEvenCPA(sellingPrice, i / 100) > 0
-          ? getBreakEvenCPA(sellingPrice, i / 100)
-          : "--", //cpa
-      "breakEven-Roas": getBreakEvenRoas(i / 100),
-      "breakEven-Roas-20": getExpect(i / 100 - 0.2),
-      "breakEven-Roas-28": getExpect(i / 100 - 0.28),
-    });
-  }
-
-  return arr;
+    return newDataSource
 }
