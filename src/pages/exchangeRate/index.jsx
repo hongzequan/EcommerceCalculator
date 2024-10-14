@@ -14,9 +14,9 @@ import { setJsonData, getJsonData } from '@/services/initData';
 const ExchangeRate = () => {
   const formRef = useRef();
   //页面利用率数据
-  const { rate } =  getJsonData();
+  const { rate } = getJsonData();
   const [readonly, setReadonly] = useState(false);
-  console.log(rate,'rate')
+  
   return (
     <PageContainer>
       <ProFormSwitch
@@ -54,7 +54,7 @@ const ExchangeRate = () => {
         autoFocusFirstInput
       >
 
-        <ProFormMoney
+        {/* <ProFormMoney
           label="1美金等于兑换下面货币"
           name="USD"
           // initialValue={1}
@@ -74,7 +74,6 @@ const ExchangeRate = () => {
           locale="ms-MY"
           // initialValue={4.32}
           width="lg"
-
         />
         <ProFormMoney
           label="泰铢"
@@ -82,7 +81,38 @@ const ExchangeRate = () => {
           locale="th-TH"
           // initialValue={33.7}
           width="lg"
+        /> */}
+        <ProFormMoney
+          label="美金换人民币"
+          name="USDtoRMB"
+          width="lg"
         />
+        <ProFormMoney
+          label="美金换泰铢"
+          name="USDtoTHB"
+          width="lg"
+          locale="th-TH"
+        />
+        <ProFormMoney
+          label="美金换林吉特"
+          name="USDtoMY"
+          width="lg"
+          locale="ms-MY"
+        />
+        <ProFormMoney
+          label="人民币换泰铢"
+          name="RMBtoTHB"
+          width="lg"
+          locale="th-TH"
+        />
+        <ProFormMoney
+          label="人民币换林吉特"
+          name="RMBtoRM"
+          width="lg"
+          locale="ms-MY"
+
+        />
+
 
         <ProFormDigit
           name="tk-commission-TH"
@@ -135,6 +165,6 @@ export default ExchangeRate;
 
 export const pageConfig = definePageConfig(() => {
   return {
-    auth: ['admin','user'],
+    auth: ['admin', 'user'],
   };
 });

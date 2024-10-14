@@ -17,9 +17,11 @@ import { setLocalStorage, getLocalStorage } from "@/tools";
 const productList = getRepos();
 const rate = {
   USD: 1,
-  USDtoRMB: 7.07,
-  USDtoMY: 4.14,
-  USDtoTHB: 33.51,
+  USDtoRMB: 7.0763,
+  USDtoMY: 4.2925,
+  USDtoTHB: 33.13,
+  RMBtoTHB: 4.6812,
+  RMBtoRM: 0.6066,
   "tk-commission-TH": 7.53,
   "tk-commission-MY": 7.53,
   SFP: 3,
@@ -34,7 +36,7 @@ export function getJsonData() {
 }
 
 //存数据
-export async function  setJsonData(key?: any, value?: any) {
+export async function setJsonData(key?: any, value?: any) {
   console.log(key, "key", value);
   if (key) {
     key === "rate" && setLocalStorage("rate", value);

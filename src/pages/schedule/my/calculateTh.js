@@ -34,10 +34,10 @@ export function calculateTh(array) {
   if (Array.isArray(array) && array.length > 0) {
     // data是一个数组并且包含至少一个值
     // 在这里执行你的逻辑
+    // TODO
     arr = array.map((item) => {
       const deliveryPriceTHB = (
-        (Number(item?.deliveryPrice) / rate?.USDtoRMB) *
-        rate?.USDtoTHB
+        (Number(item?.deliveryPrice)*rate.USDtoTHB)
       ).toFixed(2);
       return {
         ...item,

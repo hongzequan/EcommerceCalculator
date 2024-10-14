@@ -16,8 +16,8 @@ export function calculateTh(data) {
     const revenue = (allGMV * parseFloat(gmvRate)) / 100;
     const returnPrice = (returns * parseFloat(numRate)) / 100;
     const serviceFeePrice = (parseInt(serviceFee) * parseFloat(gmvRate)) / 100;
-    const profit = revenue - returnPrice - serviceFee - cost;
-    const profitRMB = (profit / rate?.USDtoTHB) * rate?.USDtoRMB;
+    const profit = revenue - returnPrice - serviceFeePrice - cost;
+    const profitRMB = profit / rate?.RMBtoTHB;
 
     return {
       ...item,
