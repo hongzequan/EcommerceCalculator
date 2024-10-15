@@ -114,11 +114,18 @@ const columns2 = [
   {
     title: "利润THB",
     dataIndex: "profit",
-    fixed: "right",
   },
   {
     title: "利润RMB",
     dataIndex: "profitRMB",
+  },
+  {
+    title: "利润占比",
+    dataIndex: "profitRMBRate",
+  },
+  {
+    title: "最终金额分配",
+    dataIndex: "lastProfit",
     fixed: "right",
   },
 ];
@@ -159,6 +166,7 @@ const Profit = () => {
     } else {
       // 如果没有错误，继续你的提交逻辑
       console.log("提交的数据:", values);
+      
       // 这里可以添加你的提交代码，例如发送请求到后端
       const result = calculateTh(values);
       console.log(result, "result");
@@ -213,6 +221,19 @@ const Profit = () => {
               {
                 required: true,
                 message: "请输入手续费",
+              },
+            ]}
+          />
+          <ProFormText
+            width="md"
+            name="financeRMB"
+            label="财务算利润RMB"
+            tooltip="这个为财务计算出来的RMB"
+            placeholder="请输入财务算利润"
+            rules={[
+              {
+                required: true,
+                message: "请输入财务算利润",
               },
             ]}
           />
