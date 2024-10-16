@@ -400,10 +400,24 @@ const reposTH = [
     description: "折香收纳柜",
   },
   {
+    id: 65,
+    name: "50cm面宽二层折香收纳柜(透明茶)",
+    deliveryPrice: "52.71",
+    sku: "50CWG02",
+    description: "折香收纳柜",
+  },
+  {
     id: 58,
     name: "50cm面宽三层折香收纳柜(透明茶)",
     deliveryPrice: "68.53",
     sku: "50CWG03",
+    description: "折香收纳柜",
+  },
+  {
+    id: 66,
+    name: "50cm面宽四层折香收纳柜(透明茶)",
+    deliveryPrice: "85.23",
+    sku: "50CWG04",
     description: "折香收纳柜",
   },
   {
@@ -447,6 +461,20 @@ const reposTH = [
     deliveryPrice: "5.5",
     sku: "TKCWZQMSMS",
     description: "宠物蒸汽毛刷",
+  },
+  {
+    id: 67,
+    name: "伸缩梳子-粉色",
+    deliveryPrice: "5.79",
+    sku: "THSSSZFS",
+    description: "伸缩梳子",
+  },
+  {
+    id: 68,
+    name: "伸缩梳子-米色",
+    deliveryPrice: "5.79",
+    sku: "THSSSZMS",
+    description: "伸缩梳子",
   },
 ];
 //马来产品
