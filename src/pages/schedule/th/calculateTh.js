@@ -35,7 +35,7 @@ export function calculateTh(array) {
     // 在这里执行你的逻辑
     arr = array.map((item) => {
       const deliveryPriceTHB = (
-        (Number(item?.deliveryPrice)*rate.USDtoTHB)
+        (Number(item?.deliveryPrice)*rate.RMBtoTHB)
       ).toFixed(2);
       return {
         ...item,
