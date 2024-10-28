@@ -51,7 +51,7 @@ export function calculateTh(price) {
   }
 
   let arr = [];
-  const priceTHB = (price / rate?.USDtoRMB) * rate?.USDtoTHB; //出库价
+  const priceTHB =  price * rate?.RMBtoTHB ; //出库价
 
   for (let i = 100; i >= 0; i--) {
     const sellingPrice = getSellingPrice(priceTHB, i / 100); //售价

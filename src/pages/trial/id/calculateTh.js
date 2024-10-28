@@ -6,13 +6,13 @@ const { rate } = getJsonData("rate");
 //计算售价
 function getSellingPrice(price, s_rate) {
   const sellingPrice =
-    price / (1 - s_rate - rate?.["tk-commission-MY"] / 100 - rate?.SFP / 100);
+    price / (1 - s_rate - rate?.["tk-commission-ID"] / 100 - rate?.SFP / 100);
   return sellingPrice.toFixed(2);
 }
 
 //计算CPA
 function getBreakEvenCPA(sellingPrice, s_rate) {
-  const maxCpa = (sellingPrice * s_rate) / rate?.USDtoMY;
+  const maxCpa = (sellingPrice * s_rate) / rate?.USDtoID;
   return maxCpa.toFixed(2);
 }
 
@@ -51,18 +51,21 @@ export function calculateTh(price) {
   }
 
   let arr = [];
-  const priceMy = price * rate?.RMBtoRM; //出库价
+  const priceID = price * rate?.RMBtoID; //出库价
 
   for (let i = 100; i >= 0; i--) {
-    const sellingPrice = getSellingPrice(priceMy, i / 100); //售价
+    const sellingPriceID = getSellingPrice(priceID, i / 100); //售价ID
+    const sellingPriceUSD = getSellingPrice(price / rate?.USDtoRMB, i / 100); //售价ID
+
     // 在循环中执行您的操作
     arr.push({
       rate: i + `%`,
-      sellingPrice: sellingPrice > 0 ? sellingPrice : "--", //售价
-      costRate: getCostRate(sellingPrice, priceMy),
+      sellingPrice: sellingPriceUSD > 0 ? sellingPriceUSD : "--",
+      'sellingPrice-id': sellingPriceID > 0 ? sellingPriceID : "--", //售价
+      costRate: getCostRate(sellingPriceID, priceID),
       maxCpa:
-        getBreakEvenCPA(sellingPrice, i / 100) > 0
-          ? getBreakEvenCPA(sellingPrice, i / 100)
+        getBreakEvenCPA(sellingPriceID, i / 100) > 0
+          ? getBreakEvenCPA(sellingPriceID, i / 100)
           : "--", //cpa
       "breakEven-Roas": getBreakEvenRoas(i / 100),
       "breakEven-Roas-20": getExpect(i / 100 - 0.2),

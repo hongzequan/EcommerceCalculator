@@ -16,7 +16,7 @@ const ExchangeRate = () => {
   //页面利用率数据
   const { rate } = getJsonData();
   const [readonly, setReadonly] = useState(false);
-  
+
   return (
     <PageContainer>
       <ProFormSwitch
@@ -100,6 +100,12 @@ const ExchangeRate = () => {
           locale="ms-MY"
         />
         <ProFormMoney
+          label="美金换卢比"
+          name="USDtoID"
+          width="lg"
+          locale="ms-ID"
+        />
+        <ProFormMoney
           label="人民币换泰铢"
           name="RMBtoTHB"
           width="lg"
@@ -110,7 +116,12 @@ const ExchangeRate = () => {
           name="RMBtoRM"
           width="lg"
           locale="ms-MY"
-
+        />
+        <ProFormMoney
+          label="人民币换卢比"
+          name="RMBtoID"
+          width="lg"
+          locale="ms-ID"
         />
 
 
@@ -127,6 +138,16 @@ const ExchangeRate = () => {
         <ProFormDigit
           name="tk-commission-MY"
           label="平台抽点(MY)"
+          placeholder="请输入平台抽点"
+          min={0}
+          max={100}
+          width="xs"
+          // initialValue={7.53}
+          addonAfter="%"
+        />
+        <ProFormDigit
+          name="tk-commission-ID"
+          label="平台抽点(ID)"
           placeholder="请输入平台抽点"
           min={0}
           max={100}

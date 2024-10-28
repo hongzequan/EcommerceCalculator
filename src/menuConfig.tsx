@@ -40,6 +40,10 @@ const asideMenuConfig: MenuDataItem[] = [
         name: '马来MY',
         path: '/trial/my',
       },
+      {
+        name: '印尼ID',
+        path: '/trial/id',
+      },
     ],
   },
   {
