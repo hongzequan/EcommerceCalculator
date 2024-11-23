@@ -6,7 +6,7 @@ const { rate } = getJsonData("rate");
 //计算售价 出库价、利润率
 function getSellingPrice(price, s_rate) {
   const sellingPrice =
-    price / (1 - s_rate - rate?.["tk-commission-TH"] / 100 - rate?.SFP / 100);
+    price / (1 - s_rate - rate?.["tk-commission-TH"] / 100);
   return sellingPrice.toFixed(2);
 }
 
@@ -24,12 +24,12 @@ function getBreakEvenRoas(s_rate) {
 
 //预期Roas 20%
 function getExpect(s_rate) {
-  const roas = (1 / (s_rate - 0.2))* (1 + rate?.damage / 100);
+  const roas = (1 / (s_rate - 0.2)) * (1 + rate?.damage / 100);
   return roas.toFixed(2);
 }
 
 export function calculateTh(array) {
-  console.log(array,'array')
+  console.log(array, 'array')
   let arr = [];
   if (Array.isArray(array) && array.length > 0) {
     // data是一个数组并且包含至少一个值
@@ -37,7 +37,7 @@ export function calculateTh(array) {
     // TODO
     arr = array.map((item) => {
       const deliveryPriceTHB = (
-        (Number(item?.deliveryPrice)*rate.RMBtoTHB)
+        (Number(item?.deliveryPrice) * rate.RMBtoTHB)
       ).toFixed(2);
       return {
         ...item,
@@ -68,7 +68,7 @@ export function calculateTh(array) {
         ),
         "breakEven-Roas-40": getBreakEvenRoas(0.40),
         "expect-40": getExpect(0.40),
-        
+
         "sellingPrice-35": getSellingPrice(deliveryPriceTHB, 0.35),
         "breakEven-CPA-35": getBreakEvenCPA(
           getSellingPrice(deliveryPriceTHB, 0.35),

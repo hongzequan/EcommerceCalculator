@@ -17,18 +17,18 @@ import { setLocalStorage, getLocalStorage } from "@/tools";
 const productList = getRepos();
 const rate = {
   USD: 1,
-  USDtoRMB: 7.0763,
-  USDtoMY: 4.2925,
-  USDtoID: 15728.36,
-  USDtoTHB: 33.13,
-  RMBtoTHB: 4.6812,
-  RMBtoRM: 0.6066,
-  RMBtoID: 2206.16,
-  "tk-commission-TH": 7.53,
-  "tk-commission-MY": 7.53,
-  "tk-commission-ID": 7.53,
-  SFP: 3,
-  damage: 20,
+  USDtoRMB: 7.2458,
+  USDtoMY: 4.4675,
+  USDtoID: 15875,
+  USDtoTHB: 34.46,
+  RMBtoTHB: 4.8355,
+  RMBtoRM: 0.6166,
+  RMBtoID: 2190.94,
+  "tk-commission-TH": 14.84,
+  "tk-commission-MY": 14.84,
+  "tk-commission-ID": 14.84,
+  SFP: 5.35,
+  damage: 19,
 };
 
 export function getJsonData() {

@@ -127,7 +127,7 @@ const ExchangeRate = () => {
 
         <ProFormDigit
           name="tk-commission-TH"
-          label="平台抽点(TH)"
+          label="平台手续费(TH)"
           placeholder="请输入平台抽点"
           min={0}
           max={100}
@@ -137,7 +137,7 @@ const ExchangeRate = () => {
         />
         <ProFormDigit
           name="tk-commission-MY"
-          label="平台抽点(MY)"
+          label="平台手续费(MY)"
           placeholder="请输入平台抽点"
           min={0}
           max={100}
@@ -147,7 +147,7 @@ const ExchangeRate = () => {
         />
         <ProFormDigit
           name="tk-commission-ID"
-          label="平台抽点(ID)"
+          label="平台手续费(ID)"
           placeholder="请输入平台抽点"
           min={0}
           max={100}

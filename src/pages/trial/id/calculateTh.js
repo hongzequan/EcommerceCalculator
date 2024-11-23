@@ -6,7 +6,7 @@ const { rate } = getJsonData("rate");
 //计算售价
 function getSellingPrice(price, s_rate) {
   const sellingPrice =
-    price / (1 - s_rate - rate?.["tk-commission-ID"] / 100 - rate?.SFP / 100);
+    price / (1 - s_rate - rate?.["tk-commission-ID"] / 100 );
   return sellingPrice.toFixed(2);
 }
 
